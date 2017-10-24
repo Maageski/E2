@@ -1,0 +1,63 @@
+@inputs EGP:wirelink User:entity
+@outputs [D1,D2,D3,D4,D5,D6,D7]
+@persist Pris
+@trigger
+if(first()){
+    Pris=10000
+    EGP:egpClear()
+    setName("Mekaniker E2 Af M"+aa()+"ge")
+    function array getCps(){
+        I=1
+        Ps=players()
+        Pc=Ps:count()
+        Cps=array()
+        while(I<=Pc){
+            if(Ps[I,entity]:isCop()){Cps:pushEntity(Ps[I,entity])}
+            I++
+        }
+        if(I>Pc){
+            return Cps
+        }
+    }
+    function number wirelink:egpButton(Idx:number,Ply:entity){
+        TL = This:egpPos(Idx) - This:egpSize(Idx) / 2 * (0 ? 0 : 1)
+        BR = This:egpPos(Idx) + This:egpSize(Idx) / (0 ? 1 : 2)
+        Cur = This:egpCursor(Ply) return inrange(Cur, TL, BR) exit()}
+    function void wirelink:drawBaseDesign(){
+        This:egpBox(1,vec2(256,256),vec2(512,512)) This:egpMaterial(1,"console/background04") This:egpColor(1,20,178,12,255)
+        This:egpBox(2,vec2(256,30),vec2(512,60)) This:egpColor(2,255,255,255,100)
+        This:egpText(3,"Mekaniker - Konfiskering",vec2(258,32)) This:egpAlign(3,1,1) This:egpSize(3,40) This:egpColor(3,0,0,0,150)
+        This:egpText(4,"Mekaniker - Konfiskering",vec2(256,30)) This:egpAlign(4,1,1) This:egpSize(4,40) This:egpColor(4,0,109,26,255)
+    }
+    function void wirelink:drawPaymentBoxes(){
+        I=1
+        Am=7
+        while(I<=Am){
+            Pos=I*60-60
+            This:egpBox(10+I,vec2(256,105+Pos),vec2(350,50)) This:egpColor(10+I,255,255,255,100)
+            This:egpText(20+I,"Bil "+I+" - "+Pris+" DKK",vec2(258,107+Pos)) This:egpAlign(20+I,1,1) This:egpSize(20+I,30) This:egpColor(20+I,0,0,0,150)
+            This:egpText(30+I,"Bil "+I+" - "+Pris+" DKK",vec2(256,105+Pos)) This:egpAlign(30+I,1,1) This:egpSize(30+I,30)
+            I++
+        }
+    }
+    EGP:drawBaseDesign()
+    EGP:drawPaymentBoxes()
+}
+ 
+if(~User & User){
+    if(ops()<100){
+        if(EGP:egpButton(11,User)){if(teamName(owner():team())=="Mekaniker"){if(D1){D1=0} else{D1=1}} else{moneyRequest(User,Pris,"Bil 1 - Betaling")}}
+        if(EGP:egpButton(12,User)){if(teamName(owner():team())=="Mekaniker"){if(D2){D2=0} else{D2=1}} else{moneyRequest(User,Pris,"Bil 2 - Betaling")}}
+        if(EGP:egpButton(13,User)){if(teamName(owner():team())=="Mekaniker"){if(D3){D3=0} else{D3=1}} else{moneyRequest(User,Pris,"Bil 3 - Betaling")}}
+        if(EGP:egpButton(14,User)){if(teamName(owner():team())=="Mekaniker"){if(D4){D4=0} else{D4=1}} else{moneyRequest(User,Pris,"Bil 4 - Betaling")}}
+        if(EGP:egpButton(15,User)){if(teamName(owner():team())=="Mekaniker"){if(D5){D5=0} else{D5=1}} else{moneyRequest(User,Pris,"Bil 5 - Betaling")}}
+        if(EGP:egpButton(16,User)){if(teamName(owner():team())=="Mekaniker"){if(D6){D6=0} else{D6=1}} else{moneyRequest(User,Pris,"Bil 6 - Betaling")}}
+        if(EGP:egpButton(17,User)){if(teamName(owner():team())=="Mekaniker"){if(D7){D7=0} else{D7=1}} else{moneyRequest(User,Pris,"Bil 7 - Betaling")}}
+ 
+    }
+}
+if(moneyClk("Bil 1 - Betaling")){D1=1 } if(moneyClk("Bil 2 - Betaling")){D2=1 }
+if(moneyClk("Bil 3 - Betaling")){D3=1 } if(moneyClk("Bil 4 - Betaling")){D4=1 }
+if(moneyClk("Bil 5 - Betaling")){D5=1 } if(moneyClk("Bil 6 - Betaling")){D6=1 }
+if(moneyClk("Bil 7 - Betaling")){D7=1}
+
