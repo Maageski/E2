@@ -1,0 +1,150 @@
+@name  Hotel E2
+@inputs E:wirelink UE:entity
+@outputs D1 D2 D3 D4 D5 D6
+@persist [V]:number [H1,H2,H3,H4,H5,H6]:number [B1,B2,B3,B4,B5,B6]:number
+@trigger 
+
+Pris = 10
+
+if(first()){
+function number wirelink:egpButton(Idx:number,Ply:entity){
+    TL = This:egpPos(Idx) - This:egpSize(Idx) / 2 * (0 ? 0 : 1)
+    BR = This:egpPos(Idx) + This:egpSize(Idx) / (0 ? 1 : 2)
+    Cur = This:egpCursor(Ply) return inrange(Cur, TL, BR) exit()
+}
+
+E:egpClear()
+
+E:egpBox(1,vec2(256,256),vec2(512,512))
+E:egpMaterial(1,"console/background04")
+E:egpColor(1,vec4(51,52,59,180))
+
+E:egpText(2,"Velkommen til hotellet",vec2(256,20))
+E:egpAlign(2,1,1)
+E:egpSize(2,40)
+E:egpFont(2,"Roboto")
+
+E:egpBox(3,vec2(256,40),vec2(700,3))
+E:egpColor(3,vec(240,60,60))
+
+V = 1
+setName("M"+aa()+"ge's hotel E2 V"+V+"")
+
+E:egpText(4,"Nyd dit ophold",vec2(256,60))
+E:egpAlign(4,1,1)
+E:egpSize(4,20)
+E:egpFont(4,"Lucida Console")
+
+E:egpBox(5,vec2(100,150),vec2(100,100))
+E:egpBox(6,vec2(250,150),vec2(100,100))
+E:egpBox(7,vec2(400,150),vec2(100,100))
+E:egpBox(8,vec2(100,300),vec2(100,100))
+E:egpBox(9,vec2(250,300),vec2(100,100))
+E:egpBox(10,vec2(400,300),vec2(100,100))
+
+E:egpBox(11,vec2(100,150),vec2(10,10))
+E:egpBox(12,vec2(250,150),vec2(10,10))
+E:egpBox(13,vec2(400,150),vec2(10,10))
+E:egpBox(14,vec2(100,300),vec2(10,10))
+E:egpBox(15,vec2(250,300),vec2(10,10))
+E:egpBox(16,vec2(400,300),vec2(10,10))
+
+E:egpMaterial(11,"gui/html/home")
+E:egpMaterial(12,"gui/html/home")
+E:egpMaterial(13,"gui/html/home")
+E:egpMaterial(14,"gui/html/home")
+E:egpMaterial(15,"gui/html/home")
+E:egpMaterial(16,"gui/html/home")
+
+E:egpColor(5,vec(0,255,0))
+E:egpColor(6,vec(0,255,0))
+E:egpColor(7,vec(0,255,0))
+E:egpColor(8,vec(0,255,0))
+E:egpColor(9,vec(0,255,0))
+E:egpColor(10,vec(0,255,0))
+}
+if(ops()<100){
+if(E:egpButton(5,UE)&B1 == 0){
+moneyRequest(UE,Pris,"Hotel #1")
+}
+
+if(moneyClk("Hotel #1")){
+ print(""+moneyClkPlayer():name()+" Har k"+oe()+"bt V"+ae()+"relse 1" )
+ H1 = 1
+ B1 = 1
+}
+
+if(E:egpButton(6,UE)&B2==0){
+moneyRequest(UE,Pris,"Hotel #2")
+}
+
+if(moneyClk("Hotel #2")){
+ print(""+moneyClkPlayer():name()+" Har k"+oe()+"bt V"+ae()+"relse 2" )
+ H2 = 1
+ B2 = 1
+}
+
+if(E:egpButton(7,UE)&B3==0){
+moneyRequest(UE,Pris,"Hotel #3")
+}
+
+if(moneyClk("Hotel #3")){
+ print(""+moneyClkPlayer():name()+" Har k"+oe()+"bt V"+ae()+"relse 3" )
+ H3 = 1 
+ B3 = 1
+}
+
+if(E:egpButton(8,UE)&B4==0){
+moneyRequest(UE,Pris,"Hotel #4")
+}
+
+if(moneyClk("Hotel #4")){
+ print(""+moneyClkPlayer():name()+" Har k"+oe()+"bt V"+ae()+"relse 4" )
+ H4 = 1 
+ B4 = 1
+}
+
+if(E:egpButton(9,UE)&B5==0){
+moneyRequest(UE,Pris,"Hotel #5")
+}
+
+if(moneyClk("Hotel #5")){
+ print(""+moneyClkPlayer():name()+" Har k"+oe()+"bt V"+ae()+"relse 5" )
+ H5 = 1 
+ B5 = 1
+}
+
+if(E:egpButton(10,UE)&B6==0){
+moneyRequest(UE,Pris,"Hotel #6")
+}
+
+if(moneyClk("Hotel #6")){
+ print(""+moneyClkPlayer():name()+" Har k"+oe()+"bt V"+ae()+"relse 6" )
+ H6 = 1 
+ B6 = 1
+}
+
+if(H1 == 1){
+ E:egpColor(5,vec(255,0,0))
+}
+
+if(H2 == 1){
+ E:egpColor(6,vec(255,0,0))
+}
+
+if(H3 == 1){
+ E:egpColor(7,vec(255,0,0))
+}
+
+if(H4 == 1){
+ E:egpColor(8,vec(255,0,0))
+}
+
+if(H5 == 1){
+ E:egpColor(9,vec(255,0,0))
+}
+
+if(H6 == 1){
+ E:egpColor(10,vec(255,0,0))
+}
+}
